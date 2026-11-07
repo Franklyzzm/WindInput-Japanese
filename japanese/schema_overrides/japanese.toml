@@ -1,1 +1,3 @@
-
+[codetable]
+enabled = true
+z_key_repeat = false   # z 是日语罗马字（za/ze/zu/zo），不能当"重复上屏"键
