@@ -1,0 +1,41 @@
+[schema]
+id = "japanese"
+name = "日本語"
+icon_label = "日"
+version = "0.2"
+author = "基于 gkovacs/rime-japanese 数据"
+description = "日语罗马字输入（词库来自 Mozc 与 JMdict）。q = 长音ー，x = 小假名（xa=ぁ、xtsu=っ）"
+
+[engine]
+type = "codetable"
+
+[engine.codetable]
+max_code_length = 64     # 日语罗马字很长（词库最长 63 位）；填 0 会回退成 4，必须显式写大
+base_sort = "weight"     # mozc 部分词条带词频，其余按文件顺序
+input_chars = ""         # 留空 = 默认 a-z；转换后的词库只含小写 a-z
+
+# 以下三个词库：先用 convert_rime_japanese.py 转换，再放进 japanese\ 目录。
+# 引用顺序与 Rime 的 import_tables 相同（mozc → jmdict → kana）。
+[[dictionaries]]
+id = "japanese_mozc"
+label = "Mozc 词库"
+description = "由 Mozc 词典转换，词组与常用表达"
+path = "japanese/japanese.mozc.dict.yaml"
+type = "rime_codetable"
+default = true
+
+[[dictionaries]]
+id = "japanese_jmdict"
+label = "JMdict 词库"
+description = "由 JMdict 转换的词汇表（EDRDG 许可）"
+path = "japanese/japanese.jmdict.dict.yaml"
+type = "rime_codetable"
+default_enabled = true
+
+[[dictionaries]]
+id = "japanese_kana"
+label = "假名表"
+description = "平假名、片假名及拗音、促音的罗马字对应；关闭后无法单打假名"
+path = "japanese/japanese.kana.dict.yaml"
+type = "rime_codetable"
+default_enabled = true
